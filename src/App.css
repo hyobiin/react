@@ -42,3 +42,4 @@
 }
 
 .test span{display:block;}
+.test ul{list-style-type:none;padding-left:0;text-align: left;}
