@@ -15,6 +15,8 @@ function App() {
       ['맹구', 1],
   ]);
 
+  let [modal, setModal] = useState(false);
+
   return (
     <>
       <div className="test">
@@ -69,20 +71,38 @@ function App() {
           <li>{나이[2][0]}: {나이[2][1]}</li>
           <li>{나이[3][0]}: {나이[3][1]}</li>
 
-          <Modal a={0} b={0} c={1} 나이={나이}/>
-          <Modal a={1} b={0} c={1} 나이={나이}/>
-          <Modal a={2} b={0} c={1} 나이={나이}/>
-          <Modal a={3} b={0} c={1} 나이={나이}/>
+          <Li a={0} b={0} c={1} 나이={나이}/>
+          <Li a={1} b={0} c={1} 나이={나이}/>
+          <Li a={2} b={0} c={1} 나이={나이}/>
+          <Li a={3} b={0} c={1} 나이={나이}/>
         </ul>
+
+        <button onClick={() => {
+          setModal(!modal);
+        }}>모달창</button>
+
+        {modal === true ? <Modal /> : null}
       </div>
     </>
   )
 }
 
-function Modal({a,b,c,나이}){
+function Li({a,b,c,나이}){
   return(
     <>
       <li>{나이[a][b]} : {나이[a][c]}</li>
+    </>
+  )
+}
+
+function Modal(){
+  return(
+    <>
+    <div className="modal">
+      <h2>제목</h2>
+      <p>날짜</p>
+      <p>상세내용</p>
+    </div>
     </>
   )
 }
