@@ -6,7 +6,7 @@ function App() {
   // 변수와 state의 차이 -> 변수는 자동적으로 값이 변경되지 않음(내가 바꿔줘야 함), state는 값이 변경되면 자동으로 재렌더링 됨
 
   // 하나로 합치기
-  let [state, setState] = useState({ 좋아요: 0, 좋아요2: 0 });
+  let [state, setState] = useState({ 좋아요1: 0, 좋아요2: 0, 좋아요3: 0 });
 
   let [나이, 나이변경] = useState([
       ['민수', 20],
@@ -16,6 +16,10 @@ function App() {
   ]);
 
   let [modal, setModal] = useState(false);
+
+  [1,2,3].map(function(a){
+    return '123456'
+  });
 
   return (
     <>
@@ -32,12 +36,24 @@ function App() {
             let newName = [...구이름];
             newName[0] = '강동구';
             구이름변경(newName);
-          }}>변경</span><span onClick={() =>
+          }}>변경</span>
+          <span onClick={() =>
             setState({...state, 좋아요: state.좋아요 + 1})
             // ...state(스프레드 연산자)는 state의 값을 그대로 복사 (업데이트에서 불변성을 유지하며 특정 속성 값만 변경)
-          }>눌러봐</span> {state.좋아요} <span onClick={() =>
-          setState({...state, 좋아요:0})
-          }>초기화</span></span>
+          }>눌러봐</span> {state.좋아요}
+          <span onClick={() =>
+            setState({...state, 좋아요:0})
+          }>초기화</span>
+        </span>
+
+        {/* map 사용 */}
+        {구이름.map((a, i) =>
+        <span key={[a + i]} style={{ color: 'blue' }}>
+          <span onClick={() =>
+            setState({...state, [`좋아요${i + 1}`]: state[`좋아요${i + 1}`] + 1})
+          }>눌러봐</span> {state[`좋아요${i + 1}`]}
+        </span>
+        )}
 
 
         <span>{ 구이름[1] }
@@ -71,20 +87,20 @@ function App() {
           <li>{나이[2][0]}: {나이[2][1]}</li>
           <li>{나이[3][0]}: {나이[3][1]}</li>
           {/* 일반 태그 map 사용 */}
-          {나이.map(item => <li>{item[0]}: {item[1]}</li>)}
+          {나이.map((item, index) => <li key={index}>{item[0]}: {item[1]}</li>)}
 
-          <Li a={0} b={0} c={1} 나이={나이}/>
-          <Li a={1} b={0} c={1} 나이={나이}/>
-          <Li a={2} b={0} c={1} 나이={나이}/>
-          <Li a={3} b={0} c={1} 나이={나이}/>
+          <Li key={0} a={0} b={0} c={1} 나이={나이}/>
+          <Li key={1} a={1} b={0} c={1} 나이={나이}/>
+          <Li key={2} a={2} b={0} c={1} 나이={나이}/>
+          <Li key={3} a={3} b={0} c={1} 나이={나이}/>
           {/* 컴포넌트 map 사용 */}
           {나이.map((item, index) => (
-            <Li key={index} a={index} 나이={나이} />
+            <Li key={index} a={index} b={0} c={1} 나이={나이} />
           ))}
         </ul>
 
         <button onClick={() => {
-          setModal(!modal);
+          setModal(true);
         }}>모달창</button>
 
         {modal === true ? <Modal /> : null}
