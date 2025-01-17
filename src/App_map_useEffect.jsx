@@ -1,16 +1,23 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
   let [구이름, 구이름변경] = useState(['강남구', '송파구', '서초구']);
   let [변경내용] = useState(['하남시', '여주', '파주']);
   let [modal, setModal] = useState([false, false, false]);
+  let [like, setLike] = useState([0, 0, 3]);
 
   return (
     <>
       <div>
         {구이름.map((a, index) =>
-          <Div key={index} index={index} 구이름={구이름} setModal={setModal}/>
+          <Div key={index}
+            index={index}
+            구이름={구이름}
+            setModal={setModal}
+            like={like[index]}
+            setLike={setLike}
+          />
         )}
 
         {modal.map((isOpen, index) => isOpen ? (
@@ -27,11 +34,15 @@ function App() {
   )
 }
 
-function Div({ index, 구이름, setModal }){
+function Div({ index, 구이름, setModal, like, setLike }){
   return(
     <>
       <div style={{ marginTop: '10px' }}>
         <span>{구이름[index]}</span>
+        <button onClick={() => {
+          console.log(4)
+          setLike(like + 1);
+        }}>💙 <span>{like}</span></button>
         <button onClick={() => {
             setModal((prev) => {
               const updatedModal = [...prev];
