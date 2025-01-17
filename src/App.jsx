@@ -17,6 +17,10 @@ function App() {
     }
     const 구이름추가 = [...구이름, 입력값]; // 기존 구이름 배열에 새 값 추가
     구이름변경(구이름추가); // 상태 업데이트하여 새로운 배열로 변경
+
+    const like추가 = [...like, 0]; // 기존 like 배열에 새 값 추가
+    setLike(like추가); // 상태 업데이트하여 새로운 배열로 변경
+
     입력값변경(''); // 입력값 초기화
   };
 
@@ -52,6 +56,7 @@ function Div({ index, 구이름, like, setLike }){
       return updateLikes;
     })
   };
+
   return(
     <>
       <div style={{ marginTop: '10px' }} onClick={() => { console.log(5); }}>
