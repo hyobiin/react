@@ -57,11 +57,18 @@ function Div({ index, 구이름, like, setLike }){
     })
   };
 
+  // 삭제 함수 다시 구현
+  const clickDelete = () => {
+    구이름변경((prev구이름) => prev구이름.filter((_, i) => i !== index));
+    setLike((prevLikes) => prevLikes.filter((_, i) => i !== index));
+  };
+
   return(
     <>
       <div style={{ marginTop: '10px' }} onClick={() => { console.log(5); }}>
         <span>{구이름[index]}</span>
         <button onClick={likeCount}>💙 <span>{like}</span></button>
+        <button onClick={clickDelete}>삭제</button>
       </div>
     </>
   )
